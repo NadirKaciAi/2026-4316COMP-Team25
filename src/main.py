@@ -1,0 +1,6 @@
+print("*** Ai Impact on jobs ***")
+print("1. Salary Analysis")
+print("2. Automation Risk Analysis")
+print("3. Growth vs Risk Comparision")
+print("4. Search by skill")
+print("5. Exit")
