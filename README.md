@@ -34,7 +34,7 @@ docs/ meeting minutes
 # Team Members
 - Aymen Lakehal
 - Fateh Abrous
-- Hussein Rashwan Rashwan
+- Hussein Rashwan
 - Mohamed Ali Allal
 - Nadir Kaci-Aissa
 - Parsa Siri
