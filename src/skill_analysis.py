@@ -1,13 +1,13 @@
 # ---------------------------------------------------------
 # skill_analysis.py
 #
-# This module handles all skill-related analysis for the project.
+# This file handles all skill-related analysis for the project.
 # It allows the user to:
 # 1. Find jobs that require a minimum level of a chosen skill
 # 2. View the full skill profile of a chosen job
 #
-# The module can run on its own for testing, or be imported into
-# another file such as main.py during final integration.
+# The file can run on its own for testing but will later be imported into
+# main.py during final touches.
 # ---------------------------------------------------------
 
 
