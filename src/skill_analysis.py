@@ -1,19 +1,87 @@
+# ---------------------------------------------------------
+# skill_analysis.py
+#
+# This module handles all skill-related analysis for the project.
+# It allows the user to:
+# 1. Find jobs that require a minimum level of a chosen skill
+# 2. View the full skill profile of a chosen job
+#
+# The module can run on its own for testing, or be imported into
+# another file such as main.py during final integration.
+# ---------------------------------------------------------
+
+
+# Import libraries
+# os is used to build the file path to the dataset
+# pandas is used to load and filter the CSV data
 import os
 import pandas as pd
 
 
+# ---------------------------------------------------------
+# Check whether the user's chosen skill number is valid
+# The dataset only contains Skill_1 to Skill_10
+# ---------------------------------------------------------
 def validate_skill_number(skill_number):
     return 1 <= skill_number <= 10
 
 
+# ---------------------------------------------------------
+# Convert a skill number into the correct dataset column name
+# Example: 3 becomes "Skill_3"
+# ---------------------------------------------------------
 def get_skill_column(skill_number):
     return f"Skill_{skill_number}"
 
 
+# ---------------------------------------------------------
+# Filter all jobs where the selected skill is at least
+# the minimum level entered by the user
+# ---------------------------------------------------------
 def filter_jobs_by_skill(data, skill_number, min_level):
-    column = get_skill_column(skill_number)
-    return data[data[column] >= min_level]
+    skill_column = get_skill_column(skill_number)
+
+    # Use pandas boolean filtering to return only matching rows
+    filtered_jobs = data[data[skill_column] >= min_level]
+
+    return filtered_jobs
 
 
+# ---------------------------------------------------------
+# Return a sorted list of unique job titles that match
+# the selected skill and minimum level
+# ---------------------------------------------------------
 def get_jobs_by_skill(data, skill_number, min_level):
-    filtered = filter_jobs_by_skill(data, skill_number, min_level)
+    filtered_jobs = filter_jobs_by_skill(data, skill_number, min_level)
+
+    # If no jobs match, return an empty list
+    if filtered_jobs.empty:
+        return []
+
+    # Remove missing values, remove duplicates, convert to a list, then sort
+    jobs = filtered_jobs["Job_Title"].dropna().unique().tolist()
+    jobs.sort()
+
+    return jobs
+
+
+# ---------------------------------------------------------
+# Return the top matching jobs based on the selected skill value
+# Jobs with the highest score in the chosen skill appear first
+# ---------------------------------------------------------
+def get_top_matching_jobs(data, skill_number, min_level, top_n=10):
+    filtered_jobs = filter_jobs_by_skill(data, skill_number, min_level)
+
+    # If nothing matched, return an empty DataFrame
+    if filtered_jobs.empty:
+        return pd.DataFrame()
+
+    skill_column = get_skill_column(skill_number)
+
+    # Sort by the selected skill column in descending order
+    top_jobs = filtered_jobs.sort_values(
+        by=skill_column,
+        ascending=False
+    )[["Job_Title", skill_column]].head(top_n)
+
+    return top_jobs
