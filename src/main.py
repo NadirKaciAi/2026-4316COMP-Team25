@@ -6,7 +6,9 @@ while test:
     prompt += "\n2. Automation Risk Analysis"
     prompt += "\n3. Growth vs Risk Comparision"
     prompt += "\n4. Search by skill"
-    prompt += "\n5. Exit"
+    prompt += "\n5. AI Exposure Index"
+    prompt += "\n6. Jobs by Keyword"
+    prompt += "\n7. Exit"
     prompt += "\n"
 
     answer = input(prompt)
@@ -21,9 +23,15 @@ while test:
 
     if answer == 4 :
         print('Go To Search by skill Feature') 
-
+    
     if answer == 5 :
+        print('Go To AI exposure index')
+
+    if answer == 6 :
+        print('Go To Jobs By Keyword')
+
+    if answer == 7 :
         print('Exiting')
         test = False
 
-    print(answer) 
+    
