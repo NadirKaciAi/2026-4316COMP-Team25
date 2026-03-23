@@ -85,3 +85,32 @@ def get_top_matching_jobs(data, skill_number, min_level, top_n=10):
     )[["Job_Title", skill_column]].head(top_n)
 
     return top_jobs
+
+# ---------------------------------------------------------
+# Return the full skill profile for a job title
+# So if the user types part of the job title, it can still work
+# For example: "data" could match "Data Scientist"
+# ---------------------------------------------------------
+def get_skill_profile_by_job(data, job_title):
+    # Find all jobs whose title contains the user's input text
+    job_matches = data[
+        data["Job_Title"].str.lower().str.contains(job_title.lower(), na=False)
+    ]
+
+    # If no matches are found, return nothing
+    if job_matches.empty:
+        return None
+
+    # Select the first matching row
+    job_row = job_matches.iloc[0]
+
+    # Store all 10 skill values
+    skills = {}
+    for i in range(1, 11):
+        skills[f"Skill_{i}"] = job_row[f"Skill_{i}"]
+
+    # Return the job title and the skill profile
+    return {
+        "job_title": job_row["Job_Title"],
+        "skills": skills
+    }
