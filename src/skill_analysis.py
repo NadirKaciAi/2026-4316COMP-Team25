@@ -10,6 +10,24 @@
 # main.py during final touches.
 # ---------------------------------------------------------
 
+def run_skill_analysis(data):
+    """
+    Main function for skill analysis.
+    This is called from main.py if the user selects this feature.
+    """
+
+    # Clean job titles (prevents matching errors)
+    data["Job_Title"] = data["Job_Title"].astype(str).str.strip()
+
+    # Display menu
+    print("\nSkill Analysis")
+    print("-------------------")
+    print("1 - Find jobs by skill level")
+    print("2 - View skill profile of a job")
+
+    # Get user choice
+    choice = input("Select an option (1 or 2): ").strip()
+
 
 # Import libraries
 # os is used to build the file path to the dataset
@@ -114,3 +132,5 @@ def get_skill_profile_by_job(data, job_title):
         "job_title": job_row["Job_Title"],
         "skills": skills
     }
+
+    
