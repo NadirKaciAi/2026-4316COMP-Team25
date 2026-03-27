@@ -2,7 +2,7 @@
 # skill_analysis.py
 #
 # This file handles all skill-related analysis for the project.
-# It allows the user to:
+# The user can either:
 # 1. Find jobs by skill level and view its AI exposure
 # 2. View the full skill profile of a chosen job and its AI exposure
 # ---------------------------------------------------------
@@ -28,7 +28,6 @@ def run_skill_analysis(data):
             print("Invalid input.")
             return
 
-        # basic validation before we do anything
         if not valid_skill_number(skill_number):
             print("Skill number must be between 1 and 10.")
             return
@@ -41,3 +40,41 @@ jobs = jobs_by_skill(data, skill_number, min_level)
 avg_exposure = average_ai_exposure_by_skill(data, skill_number, min_level)
 top_jobs = top_jobs_by_skill(data, skill_number, min_level)
 
+if not jobs:
+            print("No matching jobs found.")
+            return
+
+        print(f"\nJobs with Skill_{skill_number} >= {min_level}:")
+        for job in jobs:
+            print("-", job)
+
+        print(f"\nTotal jobs found: {len(jobs)}")
+        print(f"Average AI Exposure Index: {avg_exposure:.2f}")
+        print("\nTop matches:")
+        print(top_jobs.to_string(index=False))
+
+    elif choice == "2":
+        job_title = input("Enter a job title: ").strip()
+        result = skill_profile_by_job(data, job_title)
+
+        if result is None:
+            print("Job not found.")
+            return
+
+        print(f"\nSkill profile for {result['job_title']}:")
+        for skill, value in result["skills"].items():
+            print(f"  {skill}: {value:.2f}")
+        print(f"\nAI Exposure Index: {result['ai_exposure']:.2f}")
+
+    else:
+        print("Invalid option.")
+
+
+# Check that the selected skill number exists in the dataset
+def valid_skill_number(skill_number):
+    return 1 <= skill_number <= 10
+
+
+# Convert a number like 3 into the column name "Skill_3"
+def skill_column(skill_number):
+    return f"Skill_{skill_number}"
