@@ -1,6 +1,12 @@
+from data_loader import DataLoader
+from skill_analysis import run_skill_analysis
+
+loader = DataLoader()
+data = loader.load_data()
+
 test = True
 while test:
-
+    print()
     prompt = "*** Ai Impact on jobs ***"
     prompt += "\n1. Salary Analysis"
     prompt += "\n2. Automation Risk Analysis"
@@ -11,27 +17,29 @@ while test:
     prompt += "\n7. Exit"
     prompt += "\n"
 
-    answer = input(prompt)
-    if answer == '1' :
-        print('Go To Salary Analysis Feature') 
-    
-    if answer == '2' :
-        print('Go To Automation Risk Analysis Feature') 
+    answer = input(prompt + "Please enter an option (1-7): ")
 
-    if answer == '3' :
-        print('Go To Growth vs Risk Analysis Feature') 
+    if answer == '1':
+        print('Go To Salary Analysis Feature')
 
-    if answer == '4' :
-        print('Go To Search by skill Feature') 
-    
-    if answer == '5' :
+    elif answer == '2':
+        print('Go To Automation Risk Analysis Feature')
+
+    elif answer == '3':
+        print('Go To Growth vs Risk Analysis Feature')
+
+    elif answer == '4':
+        run_skill_analysis(data)
+
+    elif answer == '5':
         print('Go To AI exposure index')
 
-    if answer == '6' :
+    elif answer == '6':
         print('Go To Jobs By Keyword')
 
-    if answer == '7' :
+    elif answer == '7':
         print('Exiting')
         test = False
 
-    
+    else:
+        print("Invalid option.")
