@@ -11,7 +11,7 @@
 
 
 
-#import libraries
+# import libraries
 # pandas loads and filters the CSV data
 
 import pandas as pd
@@ -19,10 +19,23 @@ import pandas as pd
 #----------------------------------------------
 # Section 1: Data preparation
 #----------------------------------------------
-#Select only the columns needed for Ai Exposure Analysis
+# Select only the columns needed for AI Exposure Analysis
 def prepare_data(data):
-    Feature_data=data[["Job_Title","AI_Exposure_Index","Automation_Probability_2030"]]
-    return Feature_data
+    feature_data=data[["Job_Title","AI_Exposure_Index","Automation_Probability_2030"]]
+    return feature_data
+
+
+#-----------------------------------------------
+#  Section 2: Rank Jobs by AI Exposure Index
+#-----------------------------------------------
+def rank_jobs_by_exposure(feature_data):
+    # Sort jobs by AI Exposure Index in descending order
+    sorted_data=feature_data.sort_values(by="AI_Exposure_Index", ascending=False)
+
+    # I will get the top 10 jobs with highest AI Exposure
+    top_jobs=sorted_data.head(10)
+    return top_jobs
+
 
 
 
