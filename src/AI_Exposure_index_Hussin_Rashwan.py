@@ -36,6 +36,16 @@ def rank_jobs_by_exposure(feature_data):
     top_jobs=sorted_data.head(10)
     return top_jobs
 
+#------------------------------------------------
+# Section 3: Compare Exposure with Automation probability
+#------------------------------------------------
+def compare_exposure_with_automation(feature_data):
+    # I will select the columns needed for comparision
+    comparision_data=feature_data[["Job_Title","AI_Exposure_Index","Automation_Probability_2030"]]
+    # I will sort the data again by AI Exposure for a clear comparision
+    comparision_data=comparision_data.sort_values(by="AI_Exposure_Index", ascending=False)
+    return comparision_data
+
 
 
 
