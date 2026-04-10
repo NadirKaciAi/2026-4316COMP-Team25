@@ -1,7 +1,8 @@
 # main.py
 
 # Import Growth vs Risk Analysis feature
-from growth_analysis_Nadir_Kaci import growth_vs_risk_menu  
+from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
+from skill_analysis_Parsa_Siri import run_skill_analysis
 
 def print_main_menu():
     print("\n" + "="*50)
@@ -28,7 +29,7 @@ def main_menu():
         elif choice == '3':
             growth_vs_risk_menu() 
         elif choice == '4':
-            print("\nSearch by Skill feature not implemented yet.\n")
+            run_skill_analysis()
         elif choice == '5':
             print("\nAI Exposure Index feature not implemented yet.\n")
         elif choice == '6':
