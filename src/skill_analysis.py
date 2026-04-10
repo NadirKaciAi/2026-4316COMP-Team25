@@ -7,12 +7,11 @@
 # 2. View the full skill profile of a chosen job and its AI exposure
 # ---------------------------------------------------------
 
-import pandas as pd
-
 
 # Main function to run the skill analysis menu and handle user choices
 def run_skill_analysis(data):
-    data["Job_Title"] = data["Job_Title"].astype(str).str.strip()
+    # Convert numeric fields so comparisons and calculations work correctly
+    data = convert_numeric_fields(data)
 
     print("\nSkill Analysis")
     print("1. Find jobs by skill level and view AI exposure")
@@ -20,7 +19,6 @@ def run_skill_analysis(data):
 
     choice = input("Choose an option: ").strip()
 
-    # User inputs are validated so the skill number is between 1 and 10
     if choice == "1":
         try:
             skill_number = int(input("Enter skill number (1-10): "))
@@ -37,7 +35,6 @@ def run_skill_analysis(data):
             print("Minimum level must be between 0 and 1.")
             return
 
-        # Run the main calculations
         jobs = jobs_by_skill(data, skill_number, min_level)
         avg_exposure = average_ai_exposure_by_skill(data, skill_number, min_level)
         top_jobs = top_jobs_by_skill(data, skill_number, min_level)
@@ -53,7 +50,8 @@ def run_skill_analysis(data):
         print(f"\nTotal jobs found: {len(jobs)}")
         print(f"Average AI Exposure Index: {avg_exposure:.2f}")
         print("\nTop matches:")
-        print(top_jobs.to_string(index=False))
+        for row in top_jobs:
+            print(f"  {row['Job_Title']:<40} Skill_{skill_number}: {row[skill_column(skill_number)]:.2f}  AI_Exposure_Index: {row['AI_Exposure_Index']:.2f}")
 
     elif choice == "2":
         job_title = input("Enter a job title: ").strip()
@@ -73,6 +71,23 @@ def run_skill_analysis(data):
         print("Invalid option.")
 
 
+# Convert Skill_1-10 and AI_Exposure_Index from strings to floats
+def convert_numeric_fields(data):
+    numeric_cols = [f"Skill_{i}" for i in range(1, 11)] + ["AI_Exposure_Index"]
+    converted = []
+    for row in data:
+        row = dict(row)
+        for col in numeric_cols:
+            if col in row:
+                try:
+                    row[col] = float(row[col])
+                except (ValueError, TypeError):
+                    row[col] = None
+        row["Job_Title"] = str(row.get("Job_Title", "")).strip()
+        converted.append(row)
+    return converted
+
+
 # Check that the selected skill number exists in the dataset
 def valid_skill_number(skill_number):
     return 1 <= skill_number <= 10
@@ -86,56 +101,47 @@ def skill_column(skill_number):
 # Return all rows where the chosen skill is at least the minimum level
 def filter_by_skill(data, skill_number, min_level):
     col = skill_column(skill_number)
-    return data[data[col] >= min_level]
+    return [row for row in data if row.get(col) is not None and row[col] >= min_level]
 
 
 # Return a sorted list of job titles that match the selected skill filter
 def jobs_by_skill(data, skill_number, min_level):
     filtered = filter_by_skill(data, skill_number, min_level)
-
-    if filtered.empty:
-        return []
-
-    jobs = filtered["Job_Title"].dropna().unique().tolist()
-    jobs.sort()  # keeps output consistent
+    jobs = list({row["Job_Title"] for row in filtered if row.get("Job_Title")})
+    jobs.sort()
     return jobs
 
 
 # Calculate the average AI exposure for jobs matching the selected skill filter
 def average_ai_exposure_by_skill(data, skill_number, min_level):
     filtered = filter_by_skill(data, skill_number, min_level)
+    exposures = [row["AI_Exposure_Index"] for row in filtered if row.get("AI_Exposure_Index") is not None]
 
-    if filtered.empty:
+    if not exposures:
         return None
 
-    return filtered["AI_Exposure_Index"].mean()
+    return sum(exposures) / len(exposures)
 
 
 # Show the top matching jobs based on the selected skill value
 def top_jobs_by_skill(data, skill_number, min_level, top_n=10):
     filtered = filter_by_skill(data, skill_number, min_level)
-
-    if filtered.empty:
-        return pd.DataFrame()
-
     col = skill_column(skill_number)
-    top = filtered.sort_values(by=col, ascending=False)
-    return top[["Job_Title", col, "AI_Exposure_Index"]].head(top_n)
+    sorted_jobs = sorted(filtered, key=lambda row: row.get(col, 0), reverse=True)
+    return sorted_jobs[:top_n]
 
 
 # Return the skill profile and AI exposure for the first matching job title
 def skill_profile_by_job(data, job_title):
-    # Case-insensitive partial match
-    matches = data[
-        data["Job_Title"].str.lower().str.contains(job_title.lower(), na=False)
+    matches = [
+        row for row in data
+        if job_title.lower() in row.get("Job_Title", "").lower()
     ]
 
-    if matches.empty:
+    if not matches:
         return None
 
-    row = matches.iloc[0]
-
-    # Store all 10 skill values in a dictionary
+    row = matches[0]
     skills = {f"Skill_{i}": row[f"Skill_{i}"] for i in range(1, 11)}
 
     return {
