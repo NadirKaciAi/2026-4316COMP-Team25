@@ -1,74 +1,83 @@
 import csv
 
-# Load data
 def load_data():
     data = []
     try:
-        with open("data.csv", newline="", encoding="utf-8") as file:
+        with open("data.csv", "r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
+
             for row in reader:
-                salary = row["Average_Salary"].strip()
-
-                if salary != "":
+                if row["Average_Salary"] != "":
                     try:
-                        row["Average_Salary"] = float(salary)
+                        row["Average_Salary"] = float(row["Average_Salary"])
                         data.append(row)
-                    except ValueError:
-                        continue  # skip invalid values
+                    except:
+                        pass
 
-        print(f"✅ Loaded {len(data)} valid rows")
+        print("Loaded", len(data), "rows")
 
     except FileNotFoundError:
-        print("❌ File not found. Make sure 'data.csv' is in the same folder.")
-    except Exception as e:
-        print(f"❌ Unexpected error: {e}")
+        print("data.csv not found")
 
     return data
 
-data = load_data()
 
-def overall_average_salary():
-    if not data:
-        print("⚠️ No data available.")
+def overall_average_salary(data):
+    if len(data) == 0:
+        print("No data available")
         return
 
-    total = sum(row["Average_Salary"] for row in data)
-    avg = total / len(data)
-    print(f"\n💰 Overall Average Salary: £{avg:,.2f}")
+    total = 0
+    for row in data:
+        total = total + row["Average_Salary"]
 
-def top_10_jobs():
-    if not data:
-        print("⚠️ No data available.")
+    average = total / len(data)
+    print("Overall Average Salary: £{:.2f}".format(average))
+
+
+def top_10_jobs(data):
+    if len(data) == 0:
+        print("No data available")
         return
 
-    sorted_data = sorted(data, key=lambda x: x["Average_Salary"], reverse=True)
-    top10 = sorted_data[:10]
+    sorted_data = sorted(data, key=lambda row: row["Average_Salary"], reverse=True)
 
-    print("\n🔥 Top 10 Highest Paying Jobs:\n")
-    for job in top10:
-        print(f"{job['Job_Title']} - £{job['Average_Salary']:,.2f}")
+    print("\nTop 10 Highest Paying Jobs:")
+    count = 0
+    for row in sorted_data:
+        if count < 10:
+            print(row["Job_Title"], "- £{:.2f}".format(row["Average_Salary"]))
+            count = count + 1
 
-def avg_salary_by_education():
-    if not data:
-        print("⚠️ No data available.")
+
+def avg_salary_by_education(data):
+    if len(data) == 0:
+        print("No data available")
         return
 
-    grouped = {}
+    education_totals = {}
+    education_counts = {}
 
     for row in data:
-        edu = row["Education_Level"]
+        education = row["Education_Level"]
         salary = row["Average_Salary"]
 
-        if edu not in grouped:
-            grouped[edu] = []
-        grouped[edu].append(salary)
+        if education in education_totals:
+            education_totals[education] = education_totals[education] + salary
+            education_counts[education] = education_counts[education] + 1
+        else:
+            education_totals[education] = salary
+            education_counts[education] = 1
 
-    print("\n🎓 Average Salary by Education Level:\n")
-    for edu, salaries in grouped.items():
-        avg = sum(salaries) / len(salaries)
-        print(f"{edu}: £{avg:,.2f}")
+    print("\nAverage Salary by Education Level:")
+    for education in education_totals:
+        average = education_totals[education] / education_counts[education]
+        print(education, "- £{:.2f}".format(average))
+
 
 def menu():
+    data = load_data()
+
     while True:
         print("\n===== Salary Insights Menu =====")
         print("1. Overall Average Salary")
@@ -76,19 +85,19 @@ def menu():
         print("3. Average Salary by Education Level")
         print("4. Exit")
 
-        choice = input("Enter your choice (1-4): ")
+        choice = input("Enter your choice: ")
 
         if choice == "1":
-            overall_average_salary()
+            overall_average_salary(data)
         elif choice == "2":
-            top_10_jobs()
+            top_10_jobs(data)
         elif choice == "3":
-            avg_salary_by_education()
+            avg_salary_by_education(data)
         elif choice == "4":
-            print("Exiting... 👋")
+            print("Goodbye")
             break
         else:
-            print("❌ Invalid choice, try again.")
+            print("Invalid choice")
 
-# Run program
+
 menu()
