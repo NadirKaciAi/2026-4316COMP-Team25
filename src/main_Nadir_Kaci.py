@@ -3,12 +3,13 @@
 # Import Growth vs Risk Analysis feature
 from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
 from skill_analysis_Parsa_Siri import run_skill_analysis
+from salary_analysis_zain_alsaleh import run_salary_analysis
 
 def print_main_menu():
     print("\n" + "="*50)
     print("        AI IMPACT ON JOBS - MAIN MENU")
     print("="*50)
-    print("1. Salary Analysis           [Coming Soon]")
+    print("1. Salary Analysis           [Implemented]")
     print("2. Automation Risk Analysis  [Coming Soon]")
     print("3. Growth vs Risk Analysis   [Implemented]")
     print("4. Search by Skill           [Implemented]")
@@ -23,7 +24,7 @@ def main_menu():
         choice = input("Enter your choice (1-7): ").strip()
 
         if choice == '1':
-            print("\nSalary Analysis feature not implemented yet.\n")
+            run_salary_analysis()
         elif choice == '2':
             print("\nAutomation Risk Analysis feature not implemented yet.\n")
         elif choice == '3':
