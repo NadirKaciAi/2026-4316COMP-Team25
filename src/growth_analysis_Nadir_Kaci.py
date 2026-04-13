@@ -2,7 +2,7 @@
 
 
 #Import Data Loader
-from data_loader import DataLoader  
+from data_loader_Aymen import DataLoader  
 
 # Functionality 1, analyse job based on title
 def single_job_analysis(data_list):
