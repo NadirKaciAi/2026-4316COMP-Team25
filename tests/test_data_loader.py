@@ -2,7 +2,7 @@ import sys
 from pathlib import Path
 
 sys.path.append(str(Path(__file__).resolve().parent.parent))
-from src.data_loader import DataLoader
+from data_loader_Aymen import DataLoader
 
 
 def test_data_loads():
