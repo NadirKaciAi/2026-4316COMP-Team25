@@ -5,9 +5,13 @@ from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
 from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
+<<<<<<< Updated upstream
 from Data_Summary_Aymen import run_data_summary
 
 
+=======
+from risk_analysis import run_risk_analysis()
+>>>>>>> Stashed changes
 
 def print_main_menu():
     print("\n" + "="*50)
@@ -30,7 +34,7 @@ def main_menu():
         if choice == '1':
             run_salary_analysis()
         elif choice == '2':
-            print("\nAutomation Risk Analysis feature not implemented yet.\n")
+            run_risk_analysis()
         elif choice == '3':
             growth_vs_risk_menu() 
         elif choice == '4':
