@@ -34,7 +34,7 @@ def main_menu():
         elif choice == '4':
             run_skill_analysis()
         elif choice == '5':
-            run_ai_exposure_index(data)
+            run_ai_exposure_index()
         elif choice == '6':
             print("\nJobs by Keyword feature not implemented yet.\n")
         elif choice == '7':
