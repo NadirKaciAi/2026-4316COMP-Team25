@@ -40,5 +40,5 @@ docs/ meeting minutes
 - Parsa Siri
 - Zain Alsaleh
 
-# Visualisations,s
+# Visualisations
 To run each visualisation, switch to NAME-Visualisation branch, and run visualisation
