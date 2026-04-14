@@ -14,7 +14,7 @@ def print_main_menu():
     print("2. Automation Risk Analysis  [Coming Soon]")
     print("3. Growth vs Risk Analysis   [Implemented]")
     print("4. Search by Skill           [Implemented]")
-    print("5. AI Exposure Index         [Coming Soon]")
+    print("5. AI Exposure Index         [I]")
     print("6. Jobs by Keyword           [Coming Soon]")
     print("7. Exit")
     print("="*50)
