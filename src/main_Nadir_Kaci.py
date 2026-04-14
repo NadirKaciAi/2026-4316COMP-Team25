@@ -4,6 +4,7 @@
 from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
+from Data_Summary_Aymen import run_data_summary
 
 def print_main_menu():
     print("\n" + "="*50)
@@ -15,13 +16,14 @@ def print_main_menu():
     print("4. Search by Skill           [Implemented]")
     print("5. AI Exposure Index         [Coming Soon]")
     print("6. Jobs by Keyword           [Coming Soon]")
-    print("7. Exit")
+    print("7. Data summary              [Implemented]")
+    print("8. Exit")
     print("="*50)
 
 def main_menu():
     while True:
         print_main_menu()
-        choice = input("Enter your choice (1-7): ").strip()
+        choice = input("Enter your choice (1-8): ").strip()
 
         if choice == '1':
             run_salary_analysis()
@@ -36,10 +38,12 @@ def main_menu():
         elif choice == '6':
             print("\nJobs by Keyword feature not implemented yet.\n")
         elif choice == '7':
+            run_data_summary()
+        elif choice == '8':
             print("\nExiting program. Goodbye! 👋")
             break
         else:
-            print("\nInvalid input. Please enter a number from 1 to 7.\n")
+            print("\nInvalid input. Please enter a number from 1 to 8.\n")
 
 if __name__ == "__main__":
     main_menu()
