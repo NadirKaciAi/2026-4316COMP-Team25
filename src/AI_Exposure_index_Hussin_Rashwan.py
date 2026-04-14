@@ -45,7 +45,7 @@ def identify_high_risk_jobs(feature_data):
 
 
 #------------------------------------------------
-# Section 5: Identify Low Risk Jobs (optional but good)
+# Section 5: Identify Low Risk Jobs
 #------------------------------------------------
 def identify_low_risk_jobs(feature_data):
     """
@@ -102,7 +102,7 @@ def run_ui(feature_data):
 
 
 #------------------------------------------------
-# Main function (THIS is what you call from main UI)
+# Main function and this  is what we call from main UI
 #------------------------------------------------
 def run_ai_exposure_index(data):
     """
