@@ -1,13 +1,15 @@
 # main.py
+#Main menu for project, user will see this on startup, then user will have the option to choose from 7 options plus exit
 
-# Import Growth vs Risk Analysis feature
+# Import functionality fro respective features
 from growth_analysis_Nadir_Kaci import run_growth_vs_risk_analysis
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
 from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
 from Data_Summary_Aymen import run_data_summary
-from risk_analysis import run_risk_analysis
+from risk_analysis_med_ali import run_risk_analysis
 
+#Print main menu function
 def print_main_menu():
     print("\n" + "="*50)
     print("        AI IMPACT ON JOBS - MAIN MENU")
@@ -22,6 +24,8 @@ def print_main_menu():
     print("8. Exit")
     print("="*50)
 
+
+#Main menu loop
 def main_menu():
     while True:
         print_main_menu()
