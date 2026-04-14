@@ -1,22 +1,3 @@
-<<<<<<< HEAD
-=======
-# AI_Exposure_index
-
-# This feature analyses how different jobs are impacted by AI using two feautres:
-# -AI Exposure Index
-# -Automation Probability
-
-# The feature performs the following:
-# Rank jobs by AI Exposure Index
-# Compare Exposure with Automation Probability
-# Identifies jobs with high exposure but low automation
-
-
-
-# import libraries
-# pandas load and filter the CSV data
-
->>>>>>> ecc4d9235e1389b74a33bb5b606dc7fcea71ab2d
 import pandas as pd
 
 #----------------------------------------------
@@ -44,7 +25,6 @@ def rank_jobs_by_exposure(feature_data):
 # Section 3: Compare Exposure with Automation Probability
 #------------------------------------------------
 def compare_exposure_with_automation(feature_data):
-<<<<<<< HEAD
     """
     Returns all jobs sorted by AI Exposure for comparison
     """
@@ -65,7 +45,7 @@ def identify_high_risk_jobs(feature_data):
 
 
 #------------------------------------------------
-# Section 5: Identify Low Risk Jobs 
+# Section 5: Identify Low Risk Jobs (optional but good)
 #------------------------------------------------
 def identify_low_risk_jobs(feature_data):
     """
@@ -122,6 +102,8 @@ def run_ui(feature_data):
 
 
 #------------------------------------------------
+# Main function (THIS is what you call from main UI)
+#------------------------------------------------
 def run_ai_exposure_index(data):
     """
     Entry point for this feature
@@ -129,35 +111,3 @@ def run_ai_exposure_index(data):
     """
     feature_data = prepare_data(data)
     run_ui(feature_data)
-=======
-    # I will select the columns needed for comparision
-    comparision_data=feature_data[["Job_Title","AI_Exposure_Index","Automation_Probability_2030"]]
-    # I will sort the data again by AI Exposure for a clear comparision
-    comparision_data=comparision_data.sort_values(by="AI_Exposure_Index", ascending=False)
-    return comparision_data
-
-#-------------------------------------------------
-# Section 4: Identify High Exposure and low Automation Jobs
-#-------------------------------------------------
-# This section identifies jobs with High Exposure and low Automation
-# The Purpose of this section is to find jobs that are strongly affected by AI
-# while still being less likely to be fully automated
-
-def high_exposure_low_automation(feature_data):
-    # Here I will calculate the average values
-    average_exposure=feature_data["AI_Exposure_Index"].mean()
-    average_automation=feature_data["Automation_Probability_2030"].mean()
-
-    # Filter jobs with High Exposure but low Automation
-    filtered_jobs=feature_data[
-    (feature_data["AI_Exposure_Index"] > average_exposure) & (feature_data["Automation_Probability_2030"] < average_automation)
-    ]
-    return filtered_jobs
-
->>>>>>> ecc4d9235e1389b74a33bb5b606dc7fcea71ab2d
-
-
-
-
-
-
