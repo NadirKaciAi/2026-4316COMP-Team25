@@ -1,7 +1,7 @@
 # main.py
 
 # Import Growth vs Risk Analysis feature
-from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
+from growth_analysis_Nadir_Kaci import run_growth_vs_risk_analysis
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
 from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
@@ -19,7 +19,8 @@ def print_main_menu():
     print("4. Search by Skill           [Implemented]")
     print("5. AI Exposure Index         [Implemented]")
     print("6. Jobs by Keyword           [Coming Soon]")
-    print("7. Exit")
+    print("7. Data Summary              [Implemented]")
+    print("8. Exit")
     print("="*50)
 
 def main_menu():
@@ -32,7 +33,7 @@ def main_menu():
         elif choice == '2':
             print("\nAutomation Risk Analysis feature not implemented yet.\n")
         elif choice == '3':
-            growth_vs_risk_menu() 
+            run_growth_vs_risk_analysis() 
         elif choice == '4':
             run_skill_analysis()
         elif choice == '5':

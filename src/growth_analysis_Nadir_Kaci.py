@@ -94,7 +94,7 @@ def visual_analysis(data_list):
         print(f"{item['Job_Title'][:15]:15} | Growth: {bar_growth} ({growth}) | Risk: {bar_risk} ({risk})")
 
 #Main feature menu
-def growth_vs_risk_menu():
+def run_growth_vs_risk_analysis():
     """Mini-menu for the Growth vs Risk Analysis feature."""
     loader = DataLoader()
     data_list = loader.load_data()
