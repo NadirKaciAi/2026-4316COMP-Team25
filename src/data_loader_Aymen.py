@@ -38,12 +38,12 @@ class DataLoader:
         # =========================
         # Basic info
         # =========================
-        print("First 5 Rows:\n", data[:5], "\n")
-        print("Total Rows:", len(data), "\n")
+        # print("First 5 Rows:\n", data[:5], "\n")
+        # print("Total Rows:", len(data), "\n")
 
         # Get columns
         columns = list(data[0].keys()) if data else []
-        print("Columns:\n", columns, "\n")
+        # print("Columns:\n", columns, "\n")
 
         # =========================
         # Missing values per column
@@ -55,7 +55,7 @@ class DataLoader:
                 if row[col] == "" or row[col] is None:
                     missing_counts[col] += 1
 
-        print("Missing Values Per Column:\n", missing_counts, "\n")
+        # print("Missing Values Per Column:\n", missing_counts, "\n")
 
         # =========================
         # Drop empty columns
@@ -65,7 +65,7 @@ class DataLoader:
             if any(row[col] not in ("", None) for row in data)
         ]
 
-        print("Columns After Dropping:\n", columns_to_keep, "\n")
+        # print("Columns After Dropping:\n", columns_to_keep, "\n")
 
         # =========================
         # Cleaned dataset (in memory only)
