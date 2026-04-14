@@ -5,13 +5,8 @@ from growth_analysis_Nadir_Kaci import run_growth_vs_risk_analysis
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
 from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
-<<<<<<< Updated upstream
 from Data_Summary_Aymen import run_data_summary
-
-
-=======
-from risk_analysis import run_risk_analysis()
->>>>>>> Stashed changes
+from risk_analysis import run_risk_analysis
 
 def print_main_menu():
     print("\n" + "="*50)
