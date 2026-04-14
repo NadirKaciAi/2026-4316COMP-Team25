@@ -4,8 +4,9 @@
 from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
+from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
 from Data_Summary_Aymen import run_data_summary
-from ai_exposure_index_Aymen import run_ai_exposure_index
+
 
 
 def print_main_menu():
