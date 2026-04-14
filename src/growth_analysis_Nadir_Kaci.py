@@ -126,4 +126,4 @@ def run_growth_vs_risk_analysis():
 
 
 if __name__ == "__main__":
-    growth_vs_risk_menu()
+    run_growth_vs_risk_analysis()
