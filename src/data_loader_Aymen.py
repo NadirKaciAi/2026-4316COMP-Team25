@@ -75,7 +75,7 @@ class DataLoader:
             for row in data
         ]
 
-        print("Cleaned Dataset Preview:\n", cleaned_data[:5], "\n")
+        # print("Cleaned Dataset Preview:\n", cleaned_data[:5], "\n")
 
         return cleaned_data
 
