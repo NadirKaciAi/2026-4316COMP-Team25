@@ -4,6 +4,7 @@
 from growth_analysis_Nadir_Kaci import growth_vs_risk_menu
 from skill_analysis_Parsa_Siri import run_skill_analysis
 from salary_analysis_zain_alsaleh import run_salary_analysis
+from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
 
 def print_main_menu():
     print("\n" + "="*50)
@@ -32,7 +33,7 @@ def main_menu():
         elif choice == '4':
             run_skill_analysis()
         elif choice == '5':
-            print("\nAI Exposure Index feature not implemented yet.\n")
+            run_ai_exposure_index(data)
         elif choice == '6':
             print("\nJobs by Keyword feature not implemented yet.\n")
         elif choice == '7':
