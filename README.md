@@ -39,3 +39,6 @@ docs/ meeting minutes
 - Nadir Kaci-Aissa
 - Parsa Siri
 - Zain Alsaleh
+
+# Visualisations
+To run each visualisation, switch to NAME-Visualisation branch, and run visualisation
