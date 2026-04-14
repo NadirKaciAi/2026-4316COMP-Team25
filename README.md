@@ -40,6 +40,5 @@ docs/ meeting minutes
 - Parsa Siri
 - Zain Alsaleh
 
-# Nadir Kaci Aissa's Visualisation
-To run the visualisation, switch to the NADIR-visualisation branch and run:
-python NadirKaci_visualisation.py
+# Visualisations,s
+To run each visualisation, switch to NAME-Visualisation branch, and run visualisation
