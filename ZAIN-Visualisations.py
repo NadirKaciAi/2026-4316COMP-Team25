@@ -154,27 +154,32 @@ def main():
     loader = DataLoader()
     data = loader.load_data()
 
-    print("Choose a visualisation:")
-    print("1. Top 10 Highest Paying Jobs")
-    print("2. Average Salary by Education Level")
-    print("3. Salary by AI Risk Category")
-    print("4. Salary vs AI Exposure")
-    print("5. High Salary + Low Risk Jobs")
+    while True:
+        print("\nChoose a visualisation:")
+        print("1. Top 10 Highest Paying Jobs")
+        print("2. Average Salary by Education Level")
+        print("3. Salary by AI Risk Category")
+        print("4. Salary vs AI Exposure")
+        print("5. High Salary + Low Risk Jobs")
+        print("0. Exit")
 
-    choice = input("Enter your choice (1-5): ").strip()
+        choice = input("Enter your choice (0-5): ").strip()
 
-    if choice == "1":
-        plot_top_10_jobs(data)
-    elif choice == "2":
-        plot_salary_by_education(data)
-    elif choice == "3":
-        plot_salary_by_risk(data)
-    elif choice == "4":
-        plot_salary_vs_exposure(data)
-    elif choice == "5":
-        plot_high_salary_low_risk(data)
-    else:
-        print("Invalid choice.")
+        if choice == "1":
+            plot_top_10_jobs(data)
+        elif choice == "2":
+            plot_salary_by_education(data)
+        elif choice == "3":
+            plot_salary_by_risk(data)
+        elif choice == "4":
+            plot_salary_vs_exposure(data)
+        elif choice == "5":
+            plot_high_salary_low_risk(data)
+        elif choice == "0":
+            print("Exiting program...")
+            break
+        else:
+            print("Invalid choice. Please try again.")
 
 
 if __name__ == "__main__":
