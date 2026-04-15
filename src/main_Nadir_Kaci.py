@@ -45,9 +45,13 @@ def main_menu():
         elif choice == '6':
             jobs_by_keyword_menu()
         elif choice == '7':
+<<<<<<< Updated upstream
             run_data_summary()
         elif choice == '8':
             print("\nExiting program. Goodbye! 👋")
+=======
+            print("\nExiting program. Goodbye! ")
+>>>>>>> Stashed changes
             break
         else:
             print("\nInvalid input. Please enter a number from 1 to 8.\n")
