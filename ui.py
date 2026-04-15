@@ -4,10 +4,16 @@ import subprocess
 import sys
 
 # --- Base directory ---
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+# Check if we are running as a PyInstaller compiled .exe
+if getattr(sys, 'frozen', False):
+    # If it's an .exe, get the path of the folder the .exe is sitting in
+    BASE_DIR = os.path.dirname(sys.executable)
+else:
+    # If running from VS Code/Terminal, use the normal file path
+    BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
-# --- Cross-platform launcher 
+# --- Cross-platform launcher ---
 def run_script(relative_path):
     full_path = os.path.join(BASE_DIR, relative_path)
 
