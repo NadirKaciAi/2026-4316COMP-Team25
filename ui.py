@@ -1,24 +1,28 @@
 import tkinter as tk
+from tkinter import messagebox
 import os
 import subprocess
 import sys
 
 # --- Base directory ---
-# Check if we are running as a PyInstaller compiled .exe
 if getattr(sys, 'frozen', False):
-    # If it's an .exe, get the path of the folder the .exe is sitting in
     BASE_DIR = os.path.dirname(sys.executable)
 else:
-    # If running from VS Code/Terminal, use the normal file path
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-
 
 # --- Cross-platform launcher ---
 def run_script(relative_path):
     full_path = os.path.join(BASE_DIR, relative_path)
+    
+    # Normalize path for Windows just to be safe
+    full_path = os.path.normpath(full_path)
 
+    # ERROR POPUP 1: File not found
     if not os.path.exists(full_path):
-        print(f"ERROR: File not found -> {full_path}")
+        messagebox.showerror(
+            "File Not Found", 
+            f"Could not find the script at:\n{full_path}\n\nPlease ensure the 'src' folder is right next to this .exe file!"
+        )
         return
 
     try:
@@ -28,7 +32,6 @@ def run_script(relative_path):
                 f'start cmd /k python "{full_path}"',
                 shell=True
             )
-
         elif sys.platform == "darwin":
             # macOS
             script = f'''
@@ -38,7 +41,6 @@ def run_script(relative_path):
             end tell
             '''
             subprocess.Popen(["osascript", "-e", script])
-
         else:
             # Linux
             subprocess.Popen(
@@ -46,8 +48,8 @@ def run_script(relative_path):
             )
 
     except Exception as e:
-        print("ERROR launching script:", e)
-
+        # ERROR POPUP 2: System execution failed
+        messagebox.showerror("Execution Error", f"Failed to launch script:\n{str(e)}")
 
 # --- Button actions ---
 def salary():
@@ -75,9 +77,10 @@ def summary():
 # --- GUI ---
 root = tk.Tk()
 root.title("AI Impact on Jobs")
-root.geometry("420x520")
-root.configure(bg="#1e1e1e")
 
+# --- INCREASED WINDOW HEIGHT HERE ---
+root.geometry("420x650") 
+root.configure(bg="#1e1e1e")
 
 # --- Title ---
 tk.Label(
