@@ -3,18 +3,15 @@ from collections import Counter
 # import DataLoader from your project
 from data_loader_Aymen import DataLoader
 
-
-# ----------------------------
 # Load Data from DataLoader
-# ----------------------------
+
 def load_data():
     loader = DataLoader()
     return loader.load_data()
 
 
-# ----------------------------
 # Convert string to float safely
-# ----------------------------
+
 def get_probability(job):
     try:
         return float(job["Automation_Probability_2030"])
@@ -22,9 +19,8 @@ def get_probability(job):
         return 0
 
 
-# ----------------------------
-# 1️⃣ Top 10 Jobs
-# ----------------------------
+#  Top 10 Jobs
+
 def top_10_jobs(data):
 
     sorted_jobs = sorted(
@@ -41,9 +37,8 @@ def top_10_jobs(data):
         print(f"{i}. {job['Job_Title']} - {round(get_probability(job), 2)}")
 
 
-# ----------------------------
-# 2️⃣ Jobs by Risk Category
-# ----------------------------
+# Jobs by Risk Category
+
 def jobs_by_risk(data):
 
     categories = []
@@ -59,9 +54,7 @@ def jobs_by_risk(data):
         print(f"{category}: {count}")
 
 
-# ----------------------------
-# 3️⃣ Average by Education
-# ----------------------------
+#  Average by Education
 def avg_risk_by_education(data):
 
     education_dict = {}
@@ -82,9 +75,8 @@ def avg_risk_by_education(data):
         print(f"{edu}: {round(avg, 2)}")
 
 
-# ----------------------------
-# 4️⃣ Filter High Risk Jobs
-# ----------------------------
+#  Filter High Risk Jobs
+
 def filter_high_risk(data):
 
     print("\nHigh Risk Jobs (>70%):\n")
@@ -105,9 +97,9 @@ def filter_high_risk(data):
         print(f"{i}. {job['Job_Title']} - {round(get_probability(job), 2)}")
 
 
-# =================================================
-# 🔵 MINI MENU (TEXT ONLY UI)
-# =================================================
+
+#  MINI MENU (TEXT ONLY UI)
+
 def run_risk_analysis():
 
     data = load_data()
