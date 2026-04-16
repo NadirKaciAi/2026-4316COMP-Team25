@@ -98,66 +98,75 @@ def run_skill_analysis():
     # Convert numeric fields so comparisons and calculations work correctly
     data_local = convert_numeric_fields(data_raw)
 
-    print("\nSkill Analysis")
-    print("1. Find jobs by skill level and view AI exposure")
-    print("2. View a job's skill profile and AI exposure")
+    while True:
+        print("\nSkill Analysis")
+        print("1. Find jobs by skill level and view AI exposure")
+        print("2. View a job's skill profile and AI exposure")
+        print("3. Exit")
 
-    choice = input("Choose an option: ").strip()
+        choice = input("Choose an option: ").strip()
 
-    if choice == "1":
-        try:
-            skill_number = int(input("Enter skill number (1-10): "))
-            min_level = float(input("Enter minimum level (0-1): "))
-        except ValueError:
-            print("Invalid input.")
-            return
+        if choice == "1":
+            while True:
+                try:
+                    skill_number = int(input("Enter skill number (1-10): "))
+                    if valid_skill_number(skill_number):
+                        break
+                    print("Skill number must be between 1 and 10.")
+                except ValueError:
+                    print("Invalid input. Please enter a number.")
 
-        if not valid_skill_number(skill_number):
-            print("Skill number must be between 1 and 10.")
-            return
+            while True:
+                try:
+                    min_level = float(input("Enter minimum level (0.0-1.0): "))
+                    if 0.0 <= min_level <= 1.0:
+                        break
+                    print("Minimum level must be between 0.0 and 1.0.")
+                except ValueError:
+                    print("Invalid input. Please enter a number (e.g., 0.5).")
 
-        if min_level < 0 or min_level > 1:
-            print("Minimum level must be between 0 and 1.")
-            return
+            jobs = jobs_by_skill(data_local, skill_number, min_level)
+            avg_exposure = average_ai_exposure_by_skill(data_local, skill_number, min_level)
+            top_jobs = top_jobs_by_skill(data_local, skill_number, min_level)
 
-        jobs = jobs_by_skill(data_local, skill_number, min_level)
-        avg_exposure = average_ai_exposure_by_skill(data_local, skill_number, min_level)
-        top_jobs = top_jobs_by_skill(data_local, skill_number, min_level)
+            if not jobs:
+                print("No matching jobs found.")
+                continue
 
-        if not jobs:
-            print("No matching jobs found.")
-            return
+            print(f"\nJobs with Skill_{skill_number} >= {min_level}:")
+            for job in jobs:
+                print("-", job)
 
-        print(f"\nJobs with Skill_{skill_number} >= {min_level}:")
-        for job in jobs:
-            print("-", job)
+            print(f"\nTotal jobs found: {len(jobs)}")
+            if avg_exposure is not None:
+                print(f"Average AI Exposure Index: {avg_exposure:.2f}")
+            else:
+                print("Average AI Exposure Index: N/A")
 
-        print(f"\nTotal jobs found: {len(jobs)}")
-        if avg_exposure is not None:
-            print(f"Average AI Exposure Index: {avg_exposure:.2f}")
+            print("\nTop matches:")
+            for row in top_jobs:
+                display_title = (row['Job_Title'][:37] + '..') if len(row['Job_Title']) > 37 else row['Job_Title']
+                print(f"  {display_title:<40} Skill_{skill_number}: {row[skill_column(skill_number)]:.2f}  AI_Exposure_Index: {row['AI_Exposure_Index']:.2f}")
+
+        elif choice == "2":
+            job_title = input("Enter a job title: ").strip()
+            result = skill_profile_by_job(data_local, job_title)
+
+            if result is None:
+                print("Job not found.")
+                continue
+
+            print(f"\nSkill profile for {result['job_title']}:")
+            for skill, value in result["skills"].items():
+                print(f"  {skill}: {value:.2f}")
+
+            print(f"\nAI Exposure Index: {result['ai_exposure']:.2f}")
+
+        elif choice == "3":
+            print("Exiting Skill Analysis.")
+            break
         else:
-            print("Average AI Exposure Index: N/A")
-
-        print("\nTop matches:")
-        for row in top_jobs:
-            print(f"  {row['Job_Title']:<40} Skill_{skill_number}: {row[skill_column(skill_number)]:.2f}  AI_Exposure_Index: {row['AI_Exposure_Index']:.2f}")
-
-    elif choice == "2":
-        job_title = input("Enter a job title: ").strip()
-        result = skill_profile_by_job(data_local, job_title)
-
-        if result is None:
-            print("Job not found.")
-            return
-
-        print(f"\nSkill profile for {result['job_title']}:")
-        for skill, value in result["skills"].items():
-            print(f"  {skill}: {value:.2f}")
-
-        print(f"\nAI Exposure Index: {result['ai_exposure']:.2f}")
-
-    else:
-        print("Invalid option.")
+            print("Invalid option. Please try again.")
 
 
 if __name__ == "__main__":
