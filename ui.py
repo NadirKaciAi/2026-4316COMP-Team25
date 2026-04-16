@@ -10,7 +10,7 @@ if getattr(sys, 'frozen', False):
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# --- Cross-platform launcher ---
+# Cross-platform launcher
 def run_script(relative_path):
     full_path = os.path.join(BASE_DIR, relative_path)
     
@@ -29,7 +29,7 @@ def run_script(relative_path):
         if sys.platform == "win32":
             # Windows
             subprocess.Popen(
-                f'start cmd /k python "{full_path}"',
+                f'start cmd /c python "{full_path}"',
                 shell=True
             )
         elif sys.platform == "darwin":
