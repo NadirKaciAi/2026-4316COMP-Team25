@@ -4,20 +4,20 @@ import os
 import subprocess
 import sys
 
-# --- Base directory ---
+# Base directory
 if getattr(sys, 'frozen', False):
     BASE_DIR = os.path.dirname(sys.executable)
 else:
     BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-# Cross-platform launcher
+# Cross platform launcher
 def run_script(relative_path):
     full_path = os.path.join(BASE_DIR, relative_path)
     
-    # Normalize path for Windows just to be safe
+    # Normalise path for Windows
     full_path = os.path.normpath(full_path)
 
-    # ERROR POPUP 1: File not found
+    # Error popup: File not found
     if not os.path.exists(full_path):
         messagebox.showerror(
             "File Not Found", 
@@ -48,10 +48,10 @@ def run_script(relative_path):
             )
 
     except Exception as e:
-        # ERROR POPUP 2: System execution failed
+        # error popup: System execution failed
         messagebox.showerror("Execution Error", f"Failed to launch script:\n{str(e)}")
 
-# --- Button actions ---
+# the actions for each button
 def salary():
     run_script("src/salary_analysis_zain_alsaleh.py")
 
@@ -78,11 +78,11 @@ def summary():
 root = tk.Tk()
 root.title("AI Impact on Jobs")
 
-# --- INCREASED WINDOW HEIGHT HERE ---
+# Window increased in size to fit all buttons without scrolling
 root.geometry("420x650") 
 root.configure(bg="#1e1e1e")
 
-# --- Title ---
+# Title
 tk.Label(
     root,
     text="AI Impact on Jobs",
@@ -100,7 +100,7 @@ tk.Label(
 ).pack(pady=5)
 
 
-# --- Button style ---
+# Button style
 def make_button(text, command):
     return tk.Button(
         root,
@@ -116,7 +116,7 @@ def make_button(text, command):
     )
 
 
-# --- Buttons ---
+# Buttons for each feature 
 make_button("1. Salary Analysis", salary).pack(pady=6)
 make_button("2. Automation Risk Analysis", risk).pack(pady=6)
 make_button("3. Growth vs Risk Analysis", growth).pack(pady=6)
@@ -126,7 +126,7 @@ make_button("6. Jobs by Keyword", jobs).pack(pady=6)
 make_button("7. Data Summary", summary).pack(pady=6)
 
 
-# --- Exit ---
+# Exit
 tk.Button(
     root,
     text="Exit",
@@ -139,5 +139,5 @@ tk.Button(
 ).pack(pady=20)
 
 
-# --- Run ---
+# Run the UI loop
 root.mainloop()
