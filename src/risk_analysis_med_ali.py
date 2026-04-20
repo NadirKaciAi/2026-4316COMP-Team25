@@ -51,7 +51,7 @@ def run_risk_analysis():
             for edu, val in stats.items():
                 avg = val[0] / val[1]
             
-                bar = "█" * int(avg * 20)
+                bar = "" * int(avg * 20)
                 print(f"{edu:<20} | {avg:.2f} {bar}")
 
         elif choice == "3":
