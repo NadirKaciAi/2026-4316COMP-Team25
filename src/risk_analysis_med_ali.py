@@ -1,135 +1,55 @@
-from collections import Counter
-
-# import DataLoader from your project
-from data_loader_Aymen import DataLoader
-
-# Load Data from DataLoader
-
-def load_data():
-    loader = DataLoader()
-    return loader.load_data()
-
-
-# Convert string to float safely
-
-def get_probability(job):
-    try:
-        return float(job["Automation_Probability_2030"])
-    except:
-        return 0
-
-
-#  Top 10 Jobs
-
-def top_10_jobs(data):
-
-    sorted_jobs = sorted(
-        data,
-        key=get_probability,
-        reverse=True
-    )
-
-    top10 = sorted_jobs[:10]
-
-    print("\nTop 10 Highest Automation Risk Jobs:\n")
-
-    for i, job in enumerate(top10, start=1):
-        print(f"{i}. {job['Job_Title']} - {round(get_probability(job), 2)}")
-
-
-# Jobs by Risk Category
-
-def jobs_by_risk(data):
-
-    categories = []
-
-    for job in data:
-        categories.append(job["Risk_Category"])
-
-    counts = Counter(categories)
-
-    print("\nJobs by Risk Category:\n")
-
-    for category, count in counts.items():
-        print(f"{category}: {count}")
-
-
-#  Average by Education
-def avg_risk_by_education(data):
-
-    education_dict = {}
-
-    for job in data:
-        edu = job["Education_Level"]
-        prob = get_probability(job)
-
-        if edu not in education_dict:
-            education_dict[edu] = []
-
-        education_dict[edu].append(prob)
-
-    print("\nAverage Risk by Education:\n")
-
-    for edu, probs in education_dict.items():
-        avg = sum(probs) / len(probs)
-        print(f"{edu}: {round(avg, 2)}")
-
-
-#  Filter High Risk Jobs
-
-def filter_high_risk(data):
-
-    print("\nHigh Risk Jobs (>70%):\n")
-
-    high_risk = [
-        job for job in data
-        if get_probability(job) > 0.7
-    ]
-
-    # sort them as well (nice improvement)
-    high_risk = sorted(
-        high_risk,
-        key=get_probability,
-        reverse=True
-    )
-
-    for i, job in enumerate(high_risk[:10], start=1):
-        print(f"{i}. {job['Job_Title']} - {round(get_probability(job), 2)}")
-
-
-
-#  MINI MENU (TEXT ONLY UI)
+import csv
+import os
 
 def run_risk_analysis():
-
-    data = load_data()
+    file_path = os.path.join('data', 'data.csv')
+    
+    data = []
+    try:
+        with open(file_path, mode='r', encoding='utf-8') as file:
+            reader = csv.DictReader(file)
+            for row in reader:
+                data.append(row)
+        print(f"Successfully loaded {len(data)} rows from data.csv")
+    except FileNotFoundError:
+        print(f"Error: Still cannot find data.csv at {file_path}")
+        return
 
     while True:
+        print("\n" + "*"*26)
+        print(" AUTOMATION RISK ANALYSIS  ")
+        print("*"*26)
+        print("1. View Top 10 High-Risk Jobs")
+        print("2. Summary & Text-Chart (By Education)")
+        print("3. Exit to Main Menu")
 
-        print("\n=== Automation Risk Analysis ===")
-        print("1. Top 10 Highest Risk Jobs")
-        print("2. Jobs by Risk Category")
-        print("3. Average Risk by Education")
-        print("4. Filter High Risk Jobs (>70%)")
-        print("5. Return to Main Menu")
-
-        choice = input("Enter choice: ")
+        choice = input("Enter your choice: ").strip()
 
         if choice == "1":
-            top_10_jobs(data)
+            sorted_jobs = sorted(data, key=lambda x: float(x.get('Automation_Probability_2030', 0)), reverse=True)
+            print("\nTop 10 High-Risk Jobs (2030):")
+            for i, job in enumerate(sorted_jobs[:10], 1):
+                print(f"{i}. {job['Job_Title']} - {float(job['Automation_Probability_2030']):.1%}")
 
         elif choice == "2":
-            jobs_by_risk(data)
+          
+            stats = {}
+            for row in data:
+                edu = row.get('Education_Level', 'Other')
+                prob = float(row.get('Automation_Probability_2030', 0))
+                if edu not in stats: stats[edu] = [0, 0]
+                stats[edu][0] += prob
+                stats[edu][1] += 1
+
+            print("\nRISK SUMMARY & VISUALISATION:")
+            for edu, val in stats.items():
+                avg = val[0] / val[1]
+            
+                bar = "█" * int(avg * 20)
+                print(f"{edu:<20} | {avg:.2f} {bar}")
 
         elif choice == "3":
-            avg_risk_by_education(data)
-
-        elif choice == "4":
-            filter_high_risk(data)
-
-        elif choice == "5":
-            print("Returning to Main Menu...")
             break
 
-        else:
-            print("Invalid choice. Try again.")
+if __name__ == "__main__":
+    run_risk_analysis()

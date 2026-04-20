@@ -16,7 +16,7 @@ def print_main_menu():
     print("        AI IMPACT ON JOBS - MAIN MENU")
     print("="*50)
     print("1. Salary Analysis           [Implemented]")
-    print("2. Automation Risk Analysis  [Coming Soon]")
+    print("2. Automation Risk Analysis  [Implemented]")
     print("3. Growth vs Risk Analysis   [Implemented]")
     print("4. Search by Skill           [Implemented]")
     print("5. AI Exposure Index         [Implemented]")
