@@ -1,3 +1,9 @@
+# ---------------------------------------------------------
+# risk_analysis_med_ali.py
+# 
+# Task 1 (Group): Implementation of Automation Risk Analysis
+# Task 2 (Individual): Text-based Data Visualisation
+# ---------------------------------------------------------
 import csv
 import os
 
