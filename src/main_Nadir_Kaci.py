@@ -8,21 +8,36 @@ from salary_analysis_zain_alsaleh import run_salary_analysis
 from AI_Exposure_index_Hussin_Rashwan import run_ai_exposure_index
 from Data_Summary_Aymen import run_data_summary
 from risk_analysis_med_ali import run_risk_analysis
-from jobs_by_keyword_Fatah import jobs_by_keyword_menu
+from jobs_by_keyword_Fatah import run_jobs_by_keyword
 
 #Print main menu function
 def print_main_menu():
     print("\n" + "="*50)
     print("        AI IMPACT ON JOBS - MAIN MENU")
     print("="*50)
-    print("1. Salary Analysis           [Implemented]")
-    print("2. Automation Risk Analysis  [Implemented]")
-    print("3. Growth vs Risk Analysis   [Implemented]")
-    print("4. Search by Skill           [Implemented]")
-    print("5. AI Exposure Index         [Implemented]")
-    print("6. Jobs by Keyword           [Implemented]")
-    print("7. Data Summary              [Implemented]")
-    print("8. Exit")
+    print("1. Salary Analysis           |")
+    print("2. Automation Risk Analysis  |")
+    print("3. Growth vs Risk Analysis   |")
+    print("4. Search by Skill           |")
+    print("5. AI Exposure Index         |")
+    print("6. Jobs by Keyword           |")
+    print("7. Data Summary              |")
+    print("8. Exit                      |")
+    print("="*50)
+
+def print_main_menu():
+    print("\n" + "="*50)
+    print("        AI IMPACT ON JOBS - MAIN MENU")
+    print("="*50)   
+    
+    print("5. AI Exposure Index         |")
+    print("2. Automation Risk Analysis  |")    
+    print("7. Data Summary              |")    
+    print("3. Growth vs Risk Analysis   |")   
+    print("6. Jobs by Keyword           |")
+    print("1. Salary Analysis           |")
+    print("4. Search by Skill           |")
+    print("8. Exit                      |")
     print("="*50)
 
 
@@ -33,19 +48,19 @@ def main_menu():
         choice = input("Enter your choice (1-8): ").strip()
 
         if choice == '1':
-            run_salary_analysis()
+            run_ai_exposure_index()
         elif choice == '2':
             run_risk_analysis()
         elif choice == '3':
-            run_growth_vs_risk_analysis() 
-        elif choice == '4':
-            run_skill_analysis()
-        elif choice == '5':
-            run_ai_exposure_index()
-        elif choice == '6':
-            jobs_by_keyword_menu()
-        elif choice == '7':
             run_data_summary()
+        elif choice == '4':
+            run_growth_vs_risk_analysis()
+        elif choice == '5':
+            run_jobs_by_keyword()
+        elif choice == '6':
+            run_salary_analysis()
+        elif choice == '7':
+            run_skill_analysis()
         elif choice == '8':
             print("\nExiting program. Goodbye! 👋")
             break

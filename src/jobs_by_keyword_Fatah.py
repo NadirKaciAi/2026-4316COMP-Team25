@@ -84,7 +84,7 @@ def count_jobs_by_keyword(data):
 # =========================
 # MAIN MENU FUNCTION
 # =========================
-def jobs_by_keyword_menu():
+def run_jobs_by_keyword():
     loader = DataLoader()
     data = loader.load_data()
 
@@ -125,4 +125,4 @@ def jobs_by_keyword_menu():
 # RUN FILE DIRECTLY
 # =========================
 if __name__ == "__main__":
-    jobs_by_keyword_menu()
+    run_jobs_by_keyword()

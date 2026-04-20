@@ -93,7 +93,7 @@ def visual_analysis(data_list):
         bar_risk = "-" * int(risk)
         print(f"{item['Job_Title'][:15]:15} | Growth: {bar_growth} ({growth}) | Risk: {bar_risk} ({risk})")
 
-#Main feature menu
+#Main feature menu loop
 def run_growth_vs_risk_analysis():
     """Mini-menu for the Growth vs Risk Analysis feature."""
     loader = DataLoader()
@@ -124,6 +124,6 @@ def run_growth_vs_risk_analysis():
         else:
             print("Invalid option, please try again.")
 
-
+#main function
 if __name__ == "__main__":
     run_growth_vs_risk_analysis()
