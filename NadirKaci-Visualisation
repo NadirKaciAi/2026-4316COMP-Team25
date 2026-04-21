@@ -1,57 +1,112 @@
-# This script loads job market data and generates 4 visualisations:
-# 1. Top 10 jobs most at risk of automation
-# 2. Salary vs automation risk
-# 3. Salary distribution by risk category
-# 4. AI exposure by education level
-
-
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
-# Load dataset containing job info (salary, automation risk, AI exposure, etc.)
+
+# =========================
+# LOAD DATA
+# =========================
 df = pd.read_csv('data/data.csv')
 
-# Chart 1 - Top 10 most at risk jobs
-top10 = df.nlargest(10, 'Automation_Probability_2030')
-plt.figure(figsize=(10, 6))
-plt.barh(top10['Job_Title'], top10['Automation_Probability_2030'], color='steelblue')
-plt.xlabel('Automation Probability by 2030')
-plt.title('Top 10 Jobs Most Likely to be Automated by 2030')
-plt.tight_layout()
-plt.savefig('automation_risk.png')
-plt.show()
-plt.close()
 
-# Chart 2 - Salary vs Automation Risk
-plt.figure(figsize=(9, 6))
-plt.scatter(df['Average_Salary'], df['Automation_Probability_2030'], alpha=0.6, color='coral')
-plt.xlabel('Average Salary ($)')
-plt.ylabel('Automation Probability 2030')
-plt.title('Does Higher Salary Mean Lower Automation Risk?')
-plt.savefig('salary_vs_automation.png')
-plt.show()
-plt.close()
+# =========================
+# CHART FUNCTIONS
+# =========================
 
-# Chart 3 - Salary by Risk Category
-plt.figure(figsize=(8, 6))
-sns.boxplot(data=df, x='Risk_Category', y='Average_Salary', palette='Set2')
-plt.title('Salary Distribution by AI Risk Category')
-plt.xlabel('Risk Category')
-plt.ylabel('Average Salary ($)')
-plt.savefig('salary_by_risk.png')
-plt.show()
-plt.close()
+def chart_top10():
+    top10 = df.nlargest(10, 'Automation_Probability_2030')
 
-# Chart 4 - AI Exposure by Education Level
-edu_group = df.groupby('Education_Level')['AI_Exposure_Index'].mean().sort_values()
-plt.figure(figsize=(8, 5))
-edu_group.plot(kind='bar', color='mediumpurple')
-plt.title('Average AI Exposure Index by Education Level')
-plt.xlabel('Education Level')
-plt.ylabel('AI Exposure Index')
-plt.xticks(rotation=45)
-plt.tight_layout()
-plt.savefig('exposure_by_education.png')
-plt.show()
-plt.close()
+    plt.figure(figsize=(10, 6))
+    plt.barh(top10['Job_Title'], top10['Automation_Probability_2030'], color='steelblue')
+    plt.xlabel('Automation Probability by 2030')
+    plt.title('Top 10 Jobs Most Likely to be Automated by 2030')
+    plt.tight_layout()
+    plt.show()
+    plt.close()
+
+
+def chart_salary_vs_automation():
+    plt.figure(figsize=(9, 6))
+    plt.scatter(df['Average_Salary'], df['Automation_Probability_2030'], alpha=0.6, color='coral')
+    plt.xlabel('Average Salary ($)')
+    plt.ylabel('Automation Probability 2030')
+    plt.title('Does Higher Salary Mean Lower Automation Risk?')
+    plt.show()
+    plt.close()
+
+
+def chart_salary_by_risk():
+    plt.figure(figsize=(8, 6))
+    sns.boxplot(data=df, x='Risk_Category', y='Average_Salary', palette='Set2')
+    plt.title('Salary Distribution by AI Risk Category')
+    plt.xlabel('Risk Category')
+    plt.ylabel('Average Salary ($)')
+    plt.show()
+    plt.close()
+
+
+def chart_education_exposure():
+    edu_group = df.groupby('Education_Level')['AI_Exposure_Index'].mean().sort_values()
+
+    plt.figure(figsize=(8, 5))
+    edu_group.plot(kind='bar', color='mediumpurple')
+    plt.title('Average AI Exposure Index by Education Level')
+    plt.xlabel('Education Level')
+    plt.ylabel('AI Exposure Index')
+    plt.xticks(rotation=45)
+    plt.tight_layout()
+    plt.show()
+    plt.close()
+
+
+# =========================
+# MENU SYSTEM
+# =========================
+
+def menu():
+    print("\n===== JOB MARKET VISUALISATION MENU =====")
+    print("1. Top 10 Most At-Risk Jobs")
+    print("2. Salary vs Automation Risk")
+    print("3. Salary by Risk Category")
+    print("4. AI Exposure by Education Level")
+    print("5. Run All Charts")
+    print("6. Exit")
+
+
+def run():
+    while True:
+        menu()
+        choice = input("Select an option (1-6): ")
+
+        if choice == '1':
+            chart_top10()
+
+        elif choice == '2':
+            chart_salary_vs_automation()
+
+        elif choice == '3':
+            chart_salary_by_risk()
+
+        elif choice == '4':
+            chart_education_exposure()
+
+        elif choice == '5':
+            chart_top10()
+            chart_salary_vs_automation()
+            chart_salary_by_risk()
+            chart_education_exposure()
+
+        elif choice == '6':
+            print("Exiting program...")
+            break
+
+        else:
+            print("Invalid choice. Try again.")
+
+
+# =========================
+# START PROGRAM
+# =========================
+
+if __name__ == "__main__":
+    run()
