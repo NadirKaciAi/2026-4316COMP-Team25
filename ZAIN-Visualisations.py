@@ -1,7 +1,4 @@
-# file: ZAIN_Visualisations.py
-
 import matplotlib.pyplot as plt
-
 from src.data_loader_Aymen import DataLoader
 
 
@@ -153,6 +150,12 @@ def plot_high_salary_low_risk(data):
 def main():
     loader = DataLoader()
     data = loader.load_data()
+
+    print("Rows loaded:", len(data))
+
+    if not data:
+        print("No data was loaded.")
+        return
 
     while True:
         print("\nChoose a visualisation:")
