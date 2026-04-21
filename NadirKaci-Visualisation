@@ -1,7 +1,15 @@
+# This script loads job market data and generates 4 visualisations:
+# 1. Top 10 jobs most at risk of automation
+# 2. Salary vs automation risk
+# 3. Salary distribution by risk category
+# 4. AI exposure by education level
+
+
 import matplotlib.pyplot as plt
 import pandas as pd
 import seaborn as sns
 
+# Load dataset containing job info (salary, automation risk, AI exposure, etc.)
 df = pd.read_csv('data/data.csv')
 
 # Chart 1 - Top 10 most at risk jobs
