@@ -1,20 +1,17 @@
 from data_loader_Aymen import DataLoader
 import matplotlib.pyplot as plt
 
-
 # Function --> Basic Info
 def show_basic_info(data, columns):
     print("\nBasic Information:")
     print(f"Total Records: {len(data)}")
     print(f"Total Columns: {len(columns)}")
 
-
 # Function --> Column Names
 def show_columns(columns):
     print("\nColumns:")
     for col in columns:
         print(f" - {col}")
-
 
 # Function --> Missing Values
 def show_missing_values(data, columns):
@@ -28,7 +25,6 @@ def show_missing_values(data, columns):
     print("\nMissing Values:")
     for col, count in missing_counts.items():
         print(f"{col}: {count}")
-
 
 # Function --> Numeric Stats
 def show_numeric_stats(data, numeric_columns):
@@ -49,7 +45,6 @@ def show_numeric_stats(data, numeric_columns):
             print(f" Max: {max(values)}")
             print(f" Avg: {round(sum(values)/len(values), 2)}")
 
-
 # Function --> Text Summary
 def show_text_summary(data, columns, numeric_columns):
     print("\nText Column Summary:")
@@ -59,13 +54,11 @@ def show_text_summary(data, columns, numeric_columns):
             unique_values = set(row[col] for row in data if row[col])
             print(f"{col}: {len(unique_values)} unique values")
 
-
 # Function --> Sample Data
 def show_sample_data(data):
     print("\nSample Data (First 5 Rows):")
     for row in data[:5]:
         print(row)
-
 
 # Function --> Missing Values Visualisation
 def plot_missing_values(data, columns):
@@ -84,7 +77,6 @@ def plot_missing_values(data, columns):
     plt.xticks(rotation=45)
     plt.tight_layout()
     plt.show()
-
 
 # Function --> Salary Statistics Visualisation
 def plot_salary_stats(data):
@@ -141,7 +133,7 @@ def run_data_summary():
         print("5. Text Summary (Unique Values)")
         print("6. Sample Data")
         print("7. Show Missing Values Graph")
-        print("8. Salary Statistics Graph")
+        print("8. Show Salary Statistics Graph")
         print("9. Back to Main Menu")
         print("="*50)
 
@@ -177,7 +169,6 @@ def run_data_summary():
 
         else:
             print("Invalid choice. Try again.")
-
 
 if __name__ == "__main__":
     run_data_summary()
