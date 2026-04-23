@@ -1,6 +1,9 @@
 from data_loader_Aymen import DataLoader
 import matplotlib.pyplot as plt
 
+def pause():
+    input("\nPress Enter to return to the menu...")
+
 # Function --> Basic Info
 def show_basic_info(data, columns):
     print("\nBasic Information:")
@@ -141,27 +144,35 @@ def run_data_summary():
 
         if choice == "1":
             show_basic_info(data, columns)
+            pause()
 
         elif choice == "2":
             show_columns(columns)
+            pause()
 
         elif choice == "3":
             show_missing_values(data, columns)
+            pause()
 
         elif choice == "4":
             show_numeric_stats(data, numeric_columns)
+            pause()
 
         elif choice == "5":
             show_text_summary(data, columns, numeric_columns)
+            pause()
 
         elif choice == "6":
             show_sample_data(data)
+            pause()
 
         elif choice == "7":
             plot_missing_values(data, columns)
+            pause()
 
         elif choice == "8":
             plot_salary_stats(data)
+            pause()
 
         elif choice == "9":
             print("Returning to main menu... Goodbye! 👋")
