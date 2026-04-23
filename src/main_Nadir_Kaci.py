@@ -11,19 +11,7 @@ from risk_analysis_med_ali import run_risk_analysis
 from jobs_by_keyword_Fatah import run_jobs_by_keyword
 
 #Print main menu function
-def print_main_menu():
-    print("\n" + "="*50)
-    print("        AI IMPACT ON JOBS - MAIN MENU")
-    print("="*50)
-    print("1. Salary Analysis           |")
-    print("2. Automation Risk Analysis  |")
-    print("3. Growth vs Risk Analysis   |")
-    print("4. Search by Skill           |")
-    print("5. AI Exposure Index         |")
-    print("6. Jobs by Keyword           |")
-    print("7. Data Summary              |")
-    print("8. Exit                      |")
-    print("="*50)
+
 
 def print_main_menu():
     print("\n" + "="*50)
