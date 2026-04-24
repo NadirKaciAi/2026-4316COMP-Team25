@@ -116,14 +116,14 @@ def make_button(text, command):
     )
 
 
-# Buttons for each feature 
-make_button("1. Salary Analysis", salary).pack(pady=6)
+# Buttons for each feature (alphabetical order)
+make_button("1. AI Exposure Index", exposure).pack(pady=6)
 make_button("2. Automation Risk Analysis", risk).pack(pady=6)
-make_button("3. Growth vs Risk Analysis", growth).pack(pady=6)
-make_button("4. Search by Skill", skill).pack(pady=6)
-make_button("5. AI Exposure Index", exposure).pack(pady=6)
-make_button("6. Jobs by Keyword", jobs).pack(pady=6)
-make_button("7. Data Summary", summary).pack(pady=6)
+make_button("3. Data Summary", summary).pack(pady=6)
+make_button("4. Growth vs Risk Analysis", growth).pack(pady=6)
+make_button("5. Jobs by Keyword", jobs).pack(pady=6)
+make_button("6. Salary Analysis", salary).pack(pady=6)
+make_button("7. Search by Skill", skill).pack(pady=6)
 
 
 # Exit
